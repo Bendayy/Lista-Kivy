@@ -1,0 +1,26 @@
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
+class ShoppingListApp(App):
+    def build(self):
+        layout = BoxLayout(orientation='vertical', spacing=10, padding=10)
+        
+        self.text_input = TextInput(hint_text=' Varans Namn', multiline=False)
+        add_button = Button(text='Lägg till', on_press=self.add_item)
+
+        layout.add_widget(self.text_input)
+        layout.add_widget(add_button)
+
+        return layout
+    
+    def add_item(self, instance):
+        item_text = self.text_input.text.strip()
+        
+        if item_text:
+            print(f"Vara har lagts till:{item_text}")
+        else:
+            print("Skriv något för att det ska registreras.")
+            self.text_input.text = ''
+
+ShoppingListApp().run()
